@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.baboumbowe.agentclienttracker",
+        "sha256_cert_fingerprints": ["4D:35:02:78:12:3C:B8:E5:7A:9A:BA:25:37:C5:83:DE:32:A5:55:15:CA:98:E0:0D:2F:B6:3B:84:22:FE:AC:4B"]
+      }
+    }]

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agent &amp; Client Tracker</title>
+<meta name="description" content="Record data sales, wallet transfers and agent deals. Track every debt. Free, works offline.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="https://baboumbowe160-bit.github.io/Tracker-1/icon-192.png">
+<style>
+  :root { --blue: #2453D6; --soft: #EDF2FE; --ink: #101828; --ink2: #344054; --muted: #667085; --line: #EAECF0; --paper: #F5F6F8; --green: #067647; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.5; }
+  main { max-width: 560px; margin: 0 auto; padding: calc(env(safe-area-inset-top, 0px) + 28px) 18px calc(env(safe-area-inset-bottom, 0px) + 36px); }
+  .brand { text-align: center; }
+  .brand img { width: 96px; height: 96px; border-radius: 24px; box-shadow: 0 8px 22px rgba(16,24,40,.14); }
+  h1 { font-size: 1.7rem; margin: 14px 0 6px; }
+  .tag { color: var(--ink2); margin: 0 auto 18px; max-width: 420px; }
+  .cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 58px; border-radius: 16px; background: var(--blue); color: #fff; font-size: 1.12rem; font-weight: 800; text-decoration: none; box-shadow: 0 4px 12px rgba(16,24,40,.14); }
+  .free { text-align: center; color: var(--muted); font-size: .9rem; margin: 8px 0 22px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(16,24,40,.06); }
+  h2 { font-size: 1.1rem; margin: 0 0 10px; }
+  .tabs { display: flex; gap: 6px; background: var(--paper); border-radius: 12px; padding: 4px; margin-bottom: 12px; }
+  .tabs button { flex: 1; border: 0; background: none; border-radius: 9px; padding: 9px; font: inherit; font-weight: 700; color: var(--ink2); }
+  .tabs button.on { background: #fff; color: var(--blue); box-shadow: 0 1px 3px rgba(16,24,40,.15); }
+  ol { margin: 0; padding-left: 22px; } ol li { margin-bottom: 6px; }
+  .safe { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .safe li { display: flex; gap: 10px; align-items: flex-start; }
+  .safe .ok { flex: 0 0 24px; height: 24px; border-radius: 12px; background: #ECFDF3; color: var(--green); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: .85rem; margin-top: 2px; }
+  .qr { text-align: center; }
+  .qr img { width: 220px; height: 220px; border-radius: 12px; border: 1px solid var(--line); }
+  .qr p { color: var(--muted); font-size: .9rem; margin: 8px 0 12px; }
+  .btn2 { border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: 10px 16px; font: inherit; font-weight: 700; color: var(--ink2); }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 18px; }
+  footer a { color: var(--blue); }
+  .lang { display: flex; justify-content: flex-end; gap: 6px; margin-bottom: 6px; }
+  .lang button { border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 4px 10px; font: inherit; font-size: .82rem; color: var(--ink2); }
+  .lang button.on { border-color: var(--blue); color: var(--blue); font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <div class="lang"><button data-l="en">English</button><button data-l="fr">Français</button><button data-l="pt">Português</button></div>
+  <div class="brand"><img src="https://baboumbowe160-bit.github.io/Tracker-1/icon-192.png" alt=""><h1>Agent &amp; Client Tracker</h1><p class="tag" data-t="tag"></p></div>
+  <a class="cta" href="https://baboumbowe160-bit.github.io/Tracker-1/"><span data-t="open"></span></a>
+  <p class="free" data-t="free"></p>
+  <section class="card"><h2 data-t="howTitle"></h2>
+    <div class="tabs"><button data-os="android" class="on">Android</button><button data-os="ios">iPhone</button></div>
+    <ol id="steps"></ol></section>
+  <section class="card"><h2 data-t="safeTitle"></h2><ul class="safe" id="safe"></ul></section>
+  <section class="card qr"><h2 data-t="shareTitle"></h2><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApAAAAKQCAIAAACn190HAAAN4UlEQVR4nO3dwY0jxxZFQVFoB7T8Jnz/jZEJWsqEkgccJNiv652piPWASBar5yBX93Vd1x8AwG5/3n0AAODXBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAK+7j7Ap/763//vPsJv5d9//j7696fP//Tz6572ftbfn/p5eK/+/48bNgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AATk97BP1fdQT03v6U7vH29z+n23vW/Te89P+323qZ//VP19O+WGDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGP28M+tW1vtb53u21fefo82z5/+v2Z/vxtz//Utr9f/7+1uGEDQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgD1sPjK9T7zNtn3lU9v2nuv71vCT3LABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgwB42P+pp+9mn6t93en/afjZP5oYNAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAfawf6G+T7zN9PN82l7ytn1x52l52vetc8MGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAgMftYW/bM+a9bfvW9f3sU9uez7b95m3nr79vvOeGDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGv67ruPgNh9T3g+r7yNvXfd/r5b3vfaHHDBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgID8HvbT9o+37fueetrzn7Ztv9n7/N6280+r76Nv44YNAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAV93H+CnbdsPnrZtj3bbXnL980/5vu9t26ve9v/J9N/7qW3PZ5obNgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AATk97C37T1Pq+/Lbtuvnd57nrZt3/rUtud5atvz3Ka+R76NGzYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAEvK7ruvsMq23bu3WeFvu+99r2/p962t/Lqaf9/+OGDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGP28Petp86fZ5te73157/N055P/ftu+3vZ9n15zw0bAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAvJ72Nv2lafZx31v2/Opf99T285zqr7/XX/+vOeGDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAGCDQABgg0AAYINAAFfdx/gU/W95+nzbPu+p+r7xNxr2/t/ep5t7/80e97vuWEDQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAwOu6rrvP8FvZtr87bdte77Y98vrvte15Tnvavvupbe/z07hhA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQIBgA0CAYANAgGADQMDX3Qf43Wzbi63v756q71tP71VP2/Z8pm3bF6/vl9ff/2lu2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABDwuq7r7jP8KHvJ3/v50+r7wfXnf2rb963/vtv2nre9n9uezzQ3bAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAj4uvsAn9q2Lzt9Hvu7935+fe/5lP3j77Xt95o+T/332sYNGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAJe13XdfYaP1PeGT23bu7UnzWb1v5dp9fd/2+87zQ0bAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAr7uPsB29b3np+3FTj//bc9n2/m3nWeb+v8Pp7Z93zo3bAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAiwh/3Ntu3LPs22Pebp89T3hrf9vUz/Xk/7/GlP+//QDRsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwAC8nvY2/ZQn7bHPG3b85m27ffa9vy3vZ/O/72fz3tu2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABDwuq7r7jOsVt+7PbVtH9f+bkt9P3v6/Xna30v9fdjGDRsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwAC8nvY9o9btu3jntq2Z3xq275yfb/5af//1Pek69ywASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABICC/h829tu0Tn9p2/m3nmbZtP3vb50/b9nxObXue09ywASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIECwASBAsAEgQLABIODr7gN8anpv9Wnq+7L1feJp9efztL/3bb9XfT+7zg0bAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAgQbAAIEGwACBBsAAvJ72Ke27ftOm96XfdrznLZtz3jbHvOpbec5te38287zNG7YABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAEPC4PexT03vSp7bt0db3krfthU8/z+nzbHue22z7/+RU/f2svz9u2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABBgD5uPbNuvnT7PqenvW3+e0/vE2/ant72f22x7f7ZxwwaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAe9j8qG37yk/b033avvK2963O87yXGzYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAE2MP+Bfus32vbHnN9r3fbPvHp50+/D9O/17b3p/5+8p4bNgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAS8ruu6+wwf2bavXFffVz5V/75Pe5519X3o+vtTf/5u2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABAg2AAQINgAECDYABCQ38MGgCdwwwaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoAAwQaAAMEGgADBBoCA/wDI3RavBTi0+gAAAABJRU5ErkJggg==" alt="QR code"><p data-t="scan"></p><button class="btn2" id="share" data-t="shareBtn"></button></section>
+  <footer><span data-t="by"></span> Babou Mbowe · <a href="mailto:baboumbowe160@gmail.com">baboumbowe160@gmail.com</a><br><a href="https://baboumbowe160-bit.github.io/Tracker-1/privacy.html" data-t="privacy"></a></footer>
+</main>
+<script>
+var T = {
+  en: { tag: 'Record data sales, wallet transfers and agent deals. Track every debt. Works without internet.', open: 'Open the App', free: 'Free. No download from unknown sources.',
+    howTitle: 'Install it in 3 steps',
+    android: ['Tap "Open the App" above, in Chrome.', 'Tap Install on the card that appears. Or open the ⋮ menu and tap Install app.', 'Open it from your home screen, like any app.'],
+    ios: ['Open the app in Safari.', 'Tap the Share button.', 'Tap Add to Home Screen.'],
+    safeTitle: 'Is it safe?',
+    safe: ['Installs through Chrome or Safari: no unknown files and no warnings.', 'Asks for no phone permissions: no contacts, messages, photos, location or calls.', 'Your records are protected by your own PIN, and fingerprint if your phone has it.', 'With an account, your records are kept in your own private account that only you can open.', 'Secure connection, and you can delete your account and records at any time.'],
+    shareTitle: 'Share with your agents and customers', scan: 'Scan to open the app', shareBtn: 'Share this page', by: 'Made by', privacy: 'Privacy policy' },
+  fr: { tag: 'Notez les ventes d\'internet, les transferts et les opérations avec les agents. Suivez chaque dette. Fonctionne sans internet.', open: 'Ouvrir l\'application', free: 'Gratuit. Aucun fichier à télécharger depuis une source inconnue.',
+    howTitle: 'Installer en 3 étapes',
+    android: ['Touchez « Ouvrir l\'application » ci-dessus, dans Chrome.', 'Touchez Installer sur la carte qui apparaît. Ou ouvrez le menu ⋮ et touchez Installer l\'application.', 'Ouvrez-la depuis l\'écran d\'accueil, comme toute application.'],
+    ios: ['Ouvrez l\'application dans Safari.', 'Touchez le bouton Partager.', 'Touchez Sur l\'écran d\'accueil.'],
+    safeTitle: 'Est-ce sûr ?',
+    safe: ['S\'installe par Chrome ou Safari : aucun fichier inconnu, aucun avertissement.', 'Ne demande aucune autorisation : ni contacts, ni messages, ni photos, ni position, ni appels.', 'Vos données sont protégées par votre code PIN, et l\'empreinte si votre téléphone l\'a.', 'Avec un compte, vos données sont dans votre compte privé que vous seul pouvez ouvrir.', 'Connexion sécurisée, et vous pouvez supprimer votre compte et vos données à tout moment.'],
+    shareTitle: 'Partagez avec vos agents et clients', scan: 'Scannez pour ouvrir l\'application', shareBtn: 'Partager cette page', by: 'Créé par', privacy: 'Politique de confidentialité' },
+  pt: { tag: 'Registe vendas de internet, transferências e operações com agentes. Acompanhe cada dívida. Funciona sem internet.', open: 'Abrir a aplicação', free: 'Grátis. Sem descarregar ficheiros de fontes desconhecidas.',
+    howTitle: 'Instale em 3 passos',
+    android: ['Toque em «Abrir a aplicação» acima, no Chrome.', 'Toque em Instalar no cartão que aparece. Ou abra o menu ⋮ e toque em Instalar aplicação.', 'Abra-a no ecrã principal, como qualquer aplicação.'],
+    ios: ['Abra a aplicação no Safari.', 'Toque no botão Partilhar.', 'Toque em Adicionar ao ecrã principal.'],
+    safeTitle: 'É seguro?',
+    safe: ['Instala-se pelo Chrome ou Safari: sem ficheiros desconhecidos nem avisos.', 'Não pede autorizações: nem contactos, mensagens, fotos, localização ou chamadas.', 'Os seus registos estão protegidos pelo seu PIN, e pela impressão digital se o telemóvel tiver.', 'Com conta, os registos ficam na sua conta privada, que só você pode abrir.', 'Ligação segura, e pode eliminar a conta e os registos quando quiser.'],
+    shareTitle: 'Partilhe com os seus agentes e clientes', scan: 'Leia para abrir a aplicação', shareBtn: 'Partilhar esta página', by: 'Feito por', privacy: 'Política de privacidade' }
+};
+var lang = ((navigator.languages || [navigator.language || 'en'])[0] || 'en').slice(0, 2).toLowerCase(); if (!T[lang]) lang = 'en';
+var os = /iPhone|iPad|iPod/.test(navigator.userAgent) ? 'ios' : 'android';
+function draw() {
+  var L = T[lang]; document.documentElement.lang = lang;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (e) { e.textContent = L[e.dataset.t]; });
+  document.getElementById('steps').innerHTML = L[os].map(function (s) { return '<li>' + s + '</li>'; }).join('');
+  document.getElementById('safe').innerHTML = L.safe.map(function (s) { return '<li><span class="ok">✓</span><span>' + s + '</span></li>'; }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-os]'), function (b) { b.classList.toggle('on', b.dataset.os === os); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-l]'), function (b) { b.classList.toggle('on', b.dataset.l === lang); });
+}
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.os) { os = b.dataset.os; draw(); }
+  if (b.dataset.l) { lang = b.dataset.l; draw(); }
+  if (b.id === 'share') {
+    if (navigator.share) navigator.share({ title: 'Agent & Client Tracker', url: location.href }).catch(function () {});
+    else { try { navigator.clipboard.writeText(location.href); b.textContent = '✓'; } catch (x) {} }
+  }
+});
+draw();
+</script>
+</body>
+</html>

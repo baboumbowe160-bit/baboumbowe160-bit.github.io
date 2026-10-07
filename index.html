@@ -36,6 +36,7 @@
   .lang { display: flex; justify-content: flex-end; gap: 6px; margin-bottom: 6px; }
   .lang button { border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 4px 10px; font: inherit; font-size: .82rem; color: var(--ink2); }
   .lang button.on { border-color: var(--blue); color: var(--blue); font-weight: 700; }
+.apk { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 0; min-height: 48px; border-radius: 14px; border: 1.5px solid var(--blue); color: var(--blue); background: #fff; font-weight: 700; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -44,6 +45,8 @@
   <div class="brand"><img src="https://baboumbowe160-bit.github.io/Tracker-1/icon-192.png" alt=""><h1>Agent &amp; Client Tracker</h1><p class="tag" data-t="tag"></p></div>
   <a class="cta" href="https://baboumbowe160-bit.github.io/Tracker-1/"><span data-t="open"></span></a>
   <p class="free" data-t="free"></p>
+  <a class="apk" href="agent-client-tracker.apk" download><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5l4.5 4.5 4.5-4.5M5 20h14"/></svg><span data-t="apk"></span></a>
+  <p class="free" data-t="apkNote"></p>
   <section class="card"><h2 data-t="howTitle"></h2>
     <div class="tabs"><button data-os="android" class="on">Android</button><button data-os="ios">iPhone</button></div>
     <ol id="steps"></ol></section>
@@ -53,21 +56,21 @@
 </main>
 <script>
 var T = {
-  en: { tag: 'Record data sales, wallet transfers and agent deals. Track every debt. Works without internet.', open: 'Open the App', free: 'Free. No download from unknown sources.',
+  en: { apk: 'Download for Android (APK)', apkNote: 'Android will ask you to allow the install once.', tag: 'Record data sales, wallet transfers and agent deals. Track every debt. Works without internet.', open: 'Open the App', free: 'Free. Opens in Chrome, nothing to download.',
     howTitle: 'Install it in 3 steps',
     android: ['Tap "Open the App" above, in Chrome.', 'Tap Install on the card that appears. Or open the ⋮ menu and tap Install app.', 'Open it from your home screen, like any app.'],
     ios: ['Open the app in Safari.', 'Tap the Share button.', 'Tap Add to Home Screen.'],
     safeTitle: 'Is it safe?',
     safe: ['Installs through Chrome or Safari: no unknown files and no warnings.', 'Asks for no phone permissions: no contacts, messages, photos, location or calls.', 'Your records are protected by your own PIN, and fingerprint if your phone has it.', 'With an account, your records are kept in your own private account that only you can open.', 'Secure connection, and you can delete your account and records at any time.'],
     shareTitle: 'Share with your agents and customers', scan: 'Scan to open the app', shareBtn: 'Share this page', by: 'Made by', privacy: 'Privacy policy' },
-  fr: { tag: 'Notez les ventes d\'internet, les transferts et les opérations avec les agents. Suivez chaque dette. Fonctionne sans internet.', open: 'Ouvrir l\'application', free: 'Gratuit. Aucun fichier à télécharger depuis une source inconnue.',
+  fr: { apk: 'Télécharger pour Android (APK)', apkNote: 'Android vous demandera une fois d\'autoriser l\'installation.', tag: 'Notez les ventes d\'internet, les transferts et les opérations avec les agents. Suivez chaque dette. Fonctionne sans internet.', open: 'Ouvrir l\'application', free: 'Gratuit. S\'ouvre dans Chrome, rien à télécharger.',
     howTitle: 'Installer en 3 étapes',
     android: ['Touchez « Ouvrir l\'application » ci-dessus, dans Chrome.', 'Touchez Installer sur la carte qui apparaît. Ou ouvrez le menu ⋮ et touchez Installer l\'application.', 'Ouvrez-la depuis l\'écran d\'accueil, comme toute application.'],
     ios: ['Ouvrez l\'application dans Safari.', 'Touchez le bouton Partager.', 'Touchez Sur l\'écran d\'accueil.'],
     safeTitle: 'Est-ce sûr ?',
     safe: ['S\'installe par Chrome ou Safari : aucun fichier inconnu, aucun avertissement.', 'Ne demande aucune autorisation : ni contacts, ni messages, ni photos, ni position, ni appels.', 'Vos données sont protégées par votre code PIN, et l\'empreinte si votre téléphone l\'a.', 'Avec un compte, vos données sont dans votre compte privé que vous seul pouvez ouvrir.', 'Connexion sécurisée, et vous pouvez supprimer votre compte et vos données à tout moment.'],
     shareTitle: 'Partagez avec vos agents et clients', scan: 'Scannez pour ouvrir l\'application', shareBtn: 'Partager cette page', by: 'Créé par', privacy: 'Politique de confidentialité' },
-  pt: { tag: 'Registe vendas de internet, transferências e operações com agentes. Acompanhe cada dívida. Funciona sem internet.', open: 'Abrir a aplicação', free: 'Grátis. Sem descarregar ficheiros de fontes desconhecidas.',
+  pt: { apk: 'Descarregar para Android (APK)', apkNote: 'O Android vai pedir uma vez para permitir a instalação.', tag: 'Registe vendas de internet, transferências e operações com agentes. Acompanhe cada dívida. Funciona sem internet.', open: 'Abrir a aplicação', free: 'Grátis. Abre no Chrome, nada para descarregar.',
     howTitle: 'Instale em 3 passos',
     android: ['Toque em «Abrir a aplicação» acima, no Chrome.', 'Toque em Instalar no cartão que aparece. Ou abra o menu ⋮ e toque em Instalar aplicação.', 'Abra-a no ecrã principal, como qualquer aplicação.'],
     ios: ['Abra a aplicação no Safari.', 'Toque no botão Partilhar.', 'Toque em Adicionar ao ecrã principal.'],
